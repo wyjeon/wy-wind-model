@@ -29,7 +29,9 @@ function tp = wy_wind_trans_probs(model, np, bins)
 %
 %   Output:
 %       TP - (1 x NP) cell array of transition probabilities, where
-%           1st element is (1 x NB), rest are (NB x NB)
+%            element (i,j) shows probability of transitioning from state j in period t-1 to state i in period t.
+%            (Hence, elements in a column sum up to one)
+%            1st element is (1 x NB), rest are (NB x NB)
 
 %   WY-Wind-Model
 %   Copyright (c) 2022, Wooyoung Jeon, Ray Zimmerman
@@ -75,7 +77,7 @@ end
 % tp : cell{1 x np}
 % cell(1) : {1 x nb}, cell(2:np) : {nb x nb}
 tp = cell(1,np);
-tp{1} = squeeze(tp1(midx,:,1));
+tp{1} = squeeze(tp1(midx,:,1))';
 for t=2:np
-    tp{t} = squeeze(tp1(:,:,t));
+    tp{t} = squeeze(tp1(:,:,t))';
 end
